@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+    <title>{{mon|title}}</title> 
+{% endblock %}
+
+
+{% block content %}    
+
+
+    <h1>Your {{mon|title}} task</h1>
+    {% if text is not None  %}
+        <h2>{{ text }}</h2>
+    {% else %}
+        <p>there's no challenge for {{mon|title}}</p>
+    {% endif %}
+        
+{% endblock %}

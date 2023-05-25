@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
+from django.template.loader import render_to_string
 # Create your views here.
 
 monthlychallenges = {
@@ -8,25 +9,29 @@ monthlychallenges = {
     "february":"yoo whats good",
     "march":"how are you man",
     "april":"don't do that",
-    "may":"tell me",
+    "may": None , 
     "june":"go back",
     "july":"enjoy the moment",
     "august":"listen to some music",
     "september":"read more",
     "october":"dress well",
-    "november":"eat healthy foods",
+    "november": None,
     "december":"party timmmmeeee!"    
 }
 
 def index(request):
-    list_items = ""
+    #list_items = ""
     months = list(monthlychallenges.keys())
-    for mon in months:
+    return render(request, "challenges/index.html",{
+        "months": months
+        })
+
+''' for mon in months:
         capitalized_month = mon.capitalize()
         month_path = reverse("monthchallenge", args=[mon])
         list_items += f"<li><a href =\"{month_path}\">{capitalized_month}</a></li>"
-    response_data = f"<u>{list_items}</u>"
-    return HttpResponse(response_data)
+    response_data = f"<ol>{list_items}</ol>"
+    return HttpResponse(response_data)'''
 
 
 def monthbynumber(request, month):
@@ -43,8 +48,10 @@ def monthbynumber(request, month):
 def monthly(request, month):  
     try:
         challenge_rule = monthlychallenges[month]
-        respond_data = f"<h1>{challenge_rule}</h1>"
-        return HttpResponse(respond_data) 
+        return render(request, "challenges/challenge.html", {
+            "text": challenge_rule,
+            "mon": month
+        })
     except:
         return HttpResponseNotFound("this month is not available for humans")    
 
