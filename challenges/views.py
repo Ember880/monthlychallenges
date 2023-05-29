@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseRedirect, HttpResponseNotFound
+from django.http import  Http404, HttpResponse,HttpResponseRedirect, HttpResponseNotFound
 from django.urls import reverse
 from django.template.loader import render_to_string
 # Create your views here.
@@ -52,9 +52,7 @@ def monthly(request, month):
             "text": challenge_rule,
             "mon": month
         })
-    except:
-        return HttpResponseNotFound("this month is not available for humans")    
-
-
+    except: 
+        raise Http404()
     
      

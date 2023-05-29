@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+html{
+    font-family:'Pangolin', cursive;
+}
+body{
+    background-color: rgb(59, 59, 59);
+}
